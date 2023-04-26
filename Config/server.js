@@ -21,7 +21,10 @@ class Server {
     }
 
     middleware() {
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: '*',
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'UPDATE']
+        }));
         this.app.use(morgan("tiny"));
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.json());
