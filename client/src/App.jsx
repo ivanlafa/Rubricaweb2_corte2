@@ -1,9 +1,12 @@
 
 import {Routes,Route} from 'react-router-dom'
 import Habitaciones from './pages/Habitaciones'
-import Formulario from './pages/Formulario'
+import FrmReservas from './pages/FrmReservas'
 import Notfound from './pages/Notfound'
 import NavBar from './components/NavBar'
+import Frmhabitaciones from './pages/Frmhabitaciones'
+
+
 
 function App() {
 
@@ -13,7 +16,8 @@ function App() {
     <NavBar/>
     <Routes>
       <Route path='/' element={<Habitaciones/>}/>
-      <Route path='/nuevo' element={<Formulario/>}/>
+      <Route path='/nuevo' element={<FrmReservas/>}/>
+      <Route path='/habitaciones' element={<Frmhabitaciones/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </div>
