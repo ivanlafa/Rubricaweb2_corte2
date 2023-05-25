@@ -5,6 +5,7 @@ import FrmReservas from './pages/FrmReservas'
 import Notfound from './pages/Notfound'
 import NavBar from './components/NavBar'
 import Frmhabitaciones from './pages/Frmhabitaciones'
+import Login from './pages/Login'
 
 
 
@@ -15,6 +16,7 @@ function App() {
     <div className='container'>
     <NavBar/>
     <Routes>
+      <Route path='/login' element={<Login/>}/>
       <Route path='/' element={<Habitaciones/>}/>
       <Route path='/nuevo' element={<FrmReservas/>}/>
       <Route path='/habitaciones' element={<Frmhabitaciones/>}/>

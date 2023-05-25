@@ -1,8 +1,6 @@
-import React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import "../styless/styless.css";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 
 const Frmhabitaciones = () => {
   const [codigo, setCodigo] = useState("");
@@ -10,17 +8,23 @@ const Frmhabitaciones = () => {
   const [tipo, setTipo] = useState("");
   const [valor, setValor] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (values) => {
+    setCodigo(values.codigo);
+    setNumero(values.numero);
+    setTipo(values.tipo);
+    setValor(values.valor);
+
+    console.log("Datos del formulario:", values);
   };
+
   return (
     <div className="formulario-container">
       <Formik
         initialValues={{
-          codigo: "",
-          numero: "",
-          tipo: "",
-          valor: "",
+          codigo: codigo,
+          numero: numero,
+          tipo: tipo,
+          valor: valor,
         }}
         onSubmit={handleSubmit}
       >
@@ -28,44 +32,16 @@ const Frmhabitaciones = () => {
           <h2>Crear Habitaciones</h2>
 
           <label htmlFor="codigo">Código:</label>
-          <input
-            type="text"
-            id="codigo"
-            name="codigo"
-            value={codigo}
-            onChange={(e) => setCodigo(e.target.value)}
-            required
-          />
+          <Field type="text" id="codigo" name="codigo" />
 
-          <label htmlFor="codigo">Numero:</label>
-          <input
-            type="text"
-            id="numero"
-            name="numero"
-            value={numero}
-            onChange={(e) => setNumero(e.target.value)}
-            required
-          />
+          <label htmlFor="numero">Número:</label>
+          <Field type="text" id="numero" name="numero" />
 
-          <label htmlFor="codigo">Tipo:</label>
-          <input
-            type="text"
-            id="tipo"
-            name="tipo"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            required
-          />
+          <label htmlFor="tipo">Tipo:</label>
+          <Field type="text" id="tipo" name="tipo" />
 
           <label htmlFor="valor">Valor:</label>
-          <input
-            type="text"
-            id="valor"
-            name="valor"
-            value={valor}
-            onChange={(e) => setValor(e.target.value)}
-            required
-          />
+          <Field type="text" id="valor" name="valor" />
 
           <input type="submit" value="Enviar" />
         </Form>
@@ -75,3 +51,4 @@ const Frmhabitaciones = () => {
 };
 
 export default Frmhabitaciones;
+
