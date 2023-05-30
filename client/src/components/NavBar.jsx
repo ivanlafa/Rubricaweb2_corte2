@@ -1,17 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <div className='navbar navbar-dark bg-dark'>
-        <div className='d-flex'>
-          <Link className='btn btn-dark' to="/login">Login</Link>
-        <Link className='btn btn-dark' to="/"> Inicio</Link>
-      <Link className='btn btn-dark' to="/nuevo">Crear Reservas</Link>
-      <Link className='btn btn-dark ' to="/habitaciones">Crear habitaciones</Link>
-        </div>
-    </div>
-  )
-}
+    <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+      <div className='container-fluid'>
+        <Link className='navbar-brand' to='/'>Inicio</Link>
+        <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+          <span className='navbar-toggler-icon'></span>
+        </button>
 
-export default NavBar
+        <div className='collapse navbar-collapse' id='navbarNav'>
+          <ul className='navbar-nav ms-auto'>
+            <li className='nav-item'>
+              <Link className='nav-link' to='/login'>Login</Link>
+            </li>
+
+            <li className='nav-item'>
+              <Link className='nav-link' to='/nuevo'>Crear Reservas</Link>
+            </li>
+
+            <li className='nav-item'>
+              <Link className='nav-link' to='/habitaciones'>Crear habitaciones</Link>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;
