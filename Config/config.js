@@ -17,7 +17,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 // export const DB_PASSWORD = process.env.DB_PASSWORD || 'lafa1998'
 
 module.exports = {
-    PORT, 
+    PORT,
     DB_HOST,
     DB_PORT,
     DB_USER,

@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const {PORT} = require("./config");
+const { PORT } = require("./config");
 
 // Esta clase se utiliza para poder genear un object del Server
 // Tener una configuracion mas limpia
@@ -15,6 +15,7 @@ class Server {
 
         this.rooms = "/rooms";
         this.booking = "/bookings";
+        this.auth = "/auth";
 
         this.middleware();
         this.routes();
@@ -33,6 +34,7 @@ class Server {
     routes() {
         this.app.use(this.rooms, require("../Routes/Rooms"));
         this.app.use(this.booking, require("../Routes/Booking"));
+        this.app.use(this.auth, require("../Routes/Auth"));
     }
 
     listen() {

@@ -1,5 +1,5 @@
 const Server = require("./Config/server");
-const pool = require("./Config/db");
+const { pool } = require("./Config/db");
 //linea agregada
 
 const SERVER = new Server();

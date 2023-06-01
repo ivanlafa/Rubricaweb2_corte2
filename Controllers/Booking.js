@@ -1,10 +1,11 @@
 const { request, response } = require("express");
-const pool = require("./../Config/db");
+const { pool } = require("./../Config/db");
+const { booking, createbooking, updatebooking, deletebooking } = require("./../utils/queries");
 
 // Muestra todas las reservas que no esten eliminadas
 const reservas = (req = request, res = response) => {
     try {
-        data = pool.query(`SELECT * FROM reservas WHERE eliminada = 0`, (err, results, fields) => {
+        data = pool.query(booking, (err, results, fields) => {
             if (err) {
                 res.status(500).json(err);
             }
@@ -20,12 +21,11 @@ const reservas = (req = request, res = response) => {
 const reserva = (req = request, res = response) => {
     try {
         const data = req.body;
-        console.log(data);
-        pool.execute(`INSERT INTO reservas (codigo_habitacion, nombre_cliente, telefono_cliente, fecha_reserva, fecha_entrada, fecha_salida) VALUES (?, ?, ?, ?, ?, ?)`, [data.codigo_habitacion, data.nombre_cliente, data.telefono_cliente, data.fecha_reserva, data.fecha_entrada, data.fecha_salida], (err, result) => {
+        pool.execute(createbooking, [data.codigo_habitacion, data.nombre_cliente, data.telefono_cliente, data.fecha_reserva, data.fecha_entrada, data.fecha_salida], (err, result) => {
             if (err) {
                 res.status(500).json(err);
             }
-            res.status(200).json({"msg": `Se realizo la reserva con el codigo #${result.insertId}`});
+            res.status(200).json({ "msg": `Se realizo la reserva con el codigo #${result.insertId}` });
         });
     } catch (error) {
         res.status(500).json(error);
@@ -37,9 +37,8 @@ const actualizarReserva = (req = request, res = response,) => {
     try {
         let codigo = req.params.codigo;
         const dataUpdate = req.body;
-        const sql = `UPDATE reservas SET codigo_habitacion = ?, nombre_cliente = ?, telefono_cliente = ?, fecha_reserva = ?, fecha_entrada = ?, fecha_salida = ? WHERE codigo = ?`;
+        const sql = updatebooking;
         const values = [dataUpdate.codigo_habitacion, dataUpdate.nombre_cliente, dataUpdate.telefono_cliente, dataUpdate.fecha_reserva, dataUpdate.fecha_entrada, dataUpdate.fecha_salida, codigo];
-        console.log(dataUpdate);
         pool.execute(sql, values, (err, result) => {
             if (err) {
                 res.status(500).json(err)
@@ -57,7 +56,7 @@ const eliminarReserva = (req = request, res = response) => {
     try {
         let codigo = req.params.codigo
         // Este realiza un soft delete, cambia el paramtro del eleminada en la tabla mas no borra el registo.
-        pool.query(`UPDATE reservas SET eliminada = 1 WHERE codigo = ${codigo}`, (err, result) => {
+        pool.query(deletebooking, (err, result) => {
             if (err) {
                 res.status(500).json(err);
             }
